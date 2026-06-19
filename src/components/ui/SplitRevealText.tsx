@@ -1,5 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { useRef, type ReactNode } from 'react'
 
 interface SplitRevealTextProps {
   text: string
@@ -17,6 +17,8 @@ export function SplitRevealText({
   splitSpaces = true,
 }: SplitRevealTextProps) {
   const reduced = useReducedMotion()
+  const ref = useRef<HTMLSpanElement>(null)
+  const isInView = useInView(ref, { once: true, amount: 0.35 })
 
   if (reduced) {
     return <Tag className={className}>{text}</Tag>
@@ -27,6 +29,7 @@ export function SplitRevealText({
 
   return (
     <Tag className={className} aria-label={text}>
+      <span ref={ref} className="inline">
       {words.map((word, wi) => (
         <span key={`${word}-${wi}`} className="inline-block whitespace-nowrap">
           {word.split('').map((char) => {
@@ -35,8 +38,7 @@ export function SplitRevealText({
               <motion.span
                 key={`${char}-${i}`}
                 initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                 transition={{
                   duration: 0.25,
                   delay: delay + i * 0.02,
@@ -51,6 +53,7 @@ export function SplitRevealText({
           {splitSpaces && wi < words.length - 1 ? '\u00A0' : null}
         </span>
       ))}
+      </span>
     </Tag>
   )
 }
@@ -62,11 +65,14 @@ interface SectionRevealProps {
 }
 
 export function SectionReveal({ children, className = '', delay = 0 }: SectionRevealProps) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >

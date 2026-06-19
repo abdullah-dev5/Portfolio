@@ -19,7 +19,6 @@ export function ScrollSceneMascot({ isPlaying, onToggle }: ScrollSceneMascotProp
       transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="relative w-[240px] h-[220px] md:w-[280px] md:h-[240px]">
-        {/* Fixed anchor: glossy ball + hill (right side, vertically centered) */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full z-0">
           <div className="relative flex flex-col items-center">
             <div className="relative z-0 mb-[-36px] md:mb-[-42px]">
@@ -31,7 +30,6 @@ export function ScrollSceneMascot({ isPlaying, onToggle }: ScrollSceneMascotProp
           </div>
         </div>
 
-        {/* Glass eye — orbits ball on scroll; subtle zoom + cursor eyes */}
         <div
           className="absolute z-20 pointer-events-auto w-[108px] h-[108px] md:w-[128px] md:h-[128px]"
           style={{

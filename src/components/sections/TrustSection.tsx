@@ -42,9 +42,9 @@ export function TrustSection() {
     <section id="trust" className="snap-section relative flex flex-col justify-center px-6 md:px-12 lg:px-20 py-24 overflow-hidden">
       <div className="relative z-10 mx-auto w-full max-w-6xl text-center">
         <p className="section-label mb-6 text-muted">{trust.label}</p>
-        <h2 className="font-mono text-2xl md:text-3xl lg:text-4xl leading-snug text-text mb-4 font-bold">
+        <h2 className="display-md mb-4">
           <SplitRevealText text={trust.headline} as="span" className="block" />
-          <SplitRevealText text={trust.subheadline} as="span" className="block text-muted mt-2" delay={0.2} />
+          <SplitRevealText text={trust.subheadline} as="span" className="block text-muted mt-2 font-normal" delay={0.2} />
         </h2>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -52,13 +52,13 @@ export function TrustSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card rounded-2xl p-6 text-left accent-glow-hover transition-all duration-300"
+            className="glass-card-glossy rounded-2xl p-6 text-left accent-glow-hover transition-all duration-300"
           >
             <div className="flex justify-between items-center mb-4">
               <span className="text-xs uppercase tracking-wider text-muted">{metrics.uptime.label}</span>
-              <span className="font-mono text-lg text-text">{metrics.uptime.value}</span>
+              <span className="font-mono text-base text-text">{metrics.uptime.value}</span>
             </div>
-            <div className="relative h-16 rounded-lg bg-surface overflow-hidden">
+            <div className="relative h-16 rounded-lg glass-inner overflow-hidden">
               <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_3px,rgba(140,108,255,0.05)_3px,rgba(140,108,255,0.05)_6px)]" />
               <motion.div
                 initial={{ scaleX: 0 }}
@@ -75,7 +75,7 @@ export function TrustSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="glass-card rounded-2xl p-6 accent-glow-hover transition-all duration-300"
+            className="glass-card-glossy rounded-2xl p-6 accent-glow-hover transition-all duration-300"
           >
             <span className="text-xs uppercase tracking-wider text-muted block mb-4 text-left">
               {metrics.lighthouse.label}
@@ -92,7 +92,7 @@ export function TrustSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="glass-card rounded-2xl p-6 flex items-center justify-center accent-glow-hover transition-all duration-300"
+            className="glass-card-glossy rounded-2xl p-6 flex items-center justify-center accent-glow-hover transition-all duration-300"
           >
             <div className="relative">
               <svg className="h-28 w-28 -rotate-90" viewBox="0 0 100 100">
@@ -112,7 +112,7 @@ export function TrustSection() {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-mono text-3xl font-bold text-text">{metrics.buildTime.value}</span>
+                <span className="font-mono text-2xl font-bold text-text">{metrics.buildTime.value}</span>
                 <span className="text-[10px] uppercase tracking-wider text-muted mt-1">
                   {metrics.buildTime.label}
                 </span>
@@ -125,11 +125,11 @@ export function TrustSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="glass-card rounded-2xl p-6 text-left accent-glow-hover transition-all duration-300"
+            className="glass-card-glossy rounded-2xl p-6 text-left accent-glow-hover transition-all duration-300"
           >
             <div className="flex justify-between items-center mb-4">
               <span className="text-xs uppercase tracking-wider text-muted">{metrics.coverage.label}</span>
-              <span className="font-mono text-lg text-text">{metrics.coverage.value}</span>
+              <span className="font-mono text-base text-text">{metrics.coverage.value}</span>
             </div>
             <div className="relative h-28 flex items-center justify-center">
               <div className="h-24 w-24 rounded-full border border-accent/20 relative overflow-hidden">

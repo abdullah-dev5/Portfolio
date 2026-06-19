@@ -23,9 +23,9 @@ export function Button({
     'inline-flex items-center gap-2.5 rounded-full px-6 py-3 text-sm font-medium transition-all duration-300'
   const variants = {
     primary:
-      'border border-accent/40 bg-accent/10 text-text hover:border-accent hover:bg-accent/20',
+      'glass-panel border-accent/35 bg-accent/10 text-text hover:border-accent/55 hover:bg-accent/15',
     ghost:
-      'border border-white/10 bg-white/5 text-text hover:border-accent/50 hover:bg-white/10',
+      'glass-panel border-white/10 text-text hover:border-accent/40',
   }
 
   const inner = (

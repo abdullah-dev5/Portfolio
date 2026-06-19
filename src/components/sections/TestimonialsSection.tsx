@@ -54,31 +54,35 @@ export function TestimonialsSection() {
           {testimonials.items.map((item) => (
             <div
               key={item.name}
-              className="flex-[0_0_88%] sm:flex-[0_0_58%] lg:flex-[0_0_44%] min-w-0 pl-1"
+              className="flex-[0_0_88%] sm:flex-[0_0_58%] lg:flex-[0_0_44%] min-w-0 pl-1 shrink-0"
             >
-              <article className="border border-accent/45 bg-black/50 backdrop-blur-sm p-8 md:p-10 min-h-[300px] md:min-h-[340px] flex flex-col transition-colors duration-300 hover:border-accent/70">
+              <article className="glass-card-glossy p-8 md:p-10 min-h-[300px] md:min-h-[340px] flex flex-col accent-glow-hover transition-all duration-300">
                 <div className="flex gap-1 mb-8">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-accent text-accent" strokeWidth={0} />
                   ))}
                 </div>
 
-                <p className="text-base md:text-lg lg:text-xl text-text/90 leading-relaxed italic flex-1">
+                <p className="text-sm md:text-base text-text/90 leading-relaxed italic flex-1">
                   &ldquo;{item.quote}&rdquo;
                 </p>
 
                 <div className="mt-8 flex items-center gap-4">
-                  <div className="h-14 w-14 shrink-0 border border-white/10 bg-surface flex items-center justify-center grayscale">
+                  <div className="h-14 w-14 shrink-0 glass-inner flex items-center justify-center grayscale">
                     <span className="text-sm font-bold text-muted">{item.initials}</span>
                   </div>
                   <div>
-                    <p className="font-semibold text-base md:text-lg text-text">{item.name}</p>
+                    <p className="font-semibold text-sm md:text-base text-text">{item.name}</p>
                     <p className="text-sm text-muted mt-0.5">{item.role}</p>
                   </div>
                 </div>
               </article>
             </div>
           ))}
+          <div
+            className="flex-[0_0_12%] sm:flex-[0_0_42%] lg:flex-[0_0_56%] min-w-0 shrink-0"
+            aria-hidden
+          />
         </div>
       </div>
 
@@ -106,7 +110,7 @@ export function TestimonialsSection() {
             onClick={scrollPrev}
             disabled={!canPrev}
             aria-label="Previous testimonial"
-            className="h-11 w-11 rounded-full border border-accent/50 flex items-center justify-center text-accent transition-all duration-300 hover:bg-accent/10 disabled:opacity-25 disabled:pointer-events-none disabled:border-white/10 disabled:text-muted"
+            className="h-11 w-11 rounded-full glass-panel flex items-center justify-center text-accent transition-all duration-300 hover:border-accent/50 disabled:opacity-25 disabled:pointer-events-none disabled:border-white/10 disabled:text-muted"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -115,7 +119,7 @@ export function TestimonialsSection() {
             onClick={scrollNext}
             disabled={!canNext}
             aria-label="Next testimonial"
-            className="h-11 w-11 rounded-full border border-accent/50 flex items-center justify-center text-accent transition-all duration-300 hover:bg-accent/10 disabled:opacity-25 disabled:pointer-events-none disabled:border-white/10 disabled:text-muted"
+            className="h-11 w-11 rounded-full glass-panel flex items-center justify-center text-accent transition-all duration-300 hover:border-accent/50 disabled:opacity-25 disabled:pointer-events-none disabled:border-white/10 disabled:text-muted"
           >
             <ArrowRight className="h-4 w-4" />
           </button>

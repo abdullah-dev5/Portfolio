@@ -25,8 +25,8 @@ export function Navbar({ activeSection }: NavbarProps) {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-bg/70 backdrop-blur-md border-b border-white/5' : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? 'glass-nav-scrolled' : 'glass-nav-top'
         }`}
       >
         <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12">
@@ -84,7 +84,7 @@ export function Navbar({ activeSection }: NavbarProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-bg/95 backdrop-blur-lg lg:hidden"
+            className="fixed inset-0 z-[60] glass-nav-scrolled lg:hidden"
           >
             <div className="flex items-center justify-between px-6 py-4">
               <Logo size="sm" />
@@ -103,7 +103,7 @@ export function Navbar({ activeSection }: NavbarProps) {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-xl text-text"
+                  className="text-base text-text"
                 >
                   {link.label}
                 </a>

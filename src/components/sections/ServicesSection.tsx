@@ -51,10 +51,10 @@ export function ServicesSection() {
               <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:border-accent/40 transition-colors duration-300">
                 <Icon className="h-7 w-7 text-text" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl md:text-2xl font-semibold text-text mb-4 font-[family-name:var(--font-display)]">
+              <h3 className="text-base md:text-lg font-semibold text-text mb-3 font-[family-name:var(--font-display)]">
                 {item.title}
               </h3>
-              <p className="text-muted text-base leading-relaxed flex-1">{item.description}</p>
+              <p className="text-muted text-sm leading-relaxed flex-1">{item.description}</p>
             </motion.div>
           )
         })}

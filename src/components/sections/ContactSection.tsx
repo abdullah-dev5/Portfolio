@@ -1,8 +1,7 @@
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import { contact } from '../../data/content'
 import { Button } from '../ui/Button'
 import { SplitRevealText } from '../ui/SplitRevealText'
+import { ContactDialogue } from '../visuals/ContactDialogue'
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -20,10 +19,11 @@ function LinkedinIcon({ className }: { className?: string }) {
   )
 }
 
-function XIcon({ className }: { className?: string }) {
+function EmailIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="M2 7l10 7 10-7" />
     </svg>
   )
 }
@@ -31,19 +31,10 @@ function XIcon({ className }: { className?: string }) {
 const socialIcons = {
   github: GithubIcon,
   linkedin: LinkedinIcon,
-  x: XIcon,
+  email: EmailIcon,
 } as const
 
 export function ContactSection() {
-  const [nudgeIndex, setNudgeIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNudgeIndex((i) => (i + 1) % contact.nudges.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <section
       id="contact"
@@ -58,26 +49,15 @@ export function ContactSection() {
         <SplitRevealText
           text={contact.sub}
           as="p"
-          className="text-muted text-lg leading-relaxed mb-8"
+          className="body-lg mb-8"
           delay={0.2}
         />
 
-        <motion.p
-          key={nudgeIndex}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="text-sm text-accent/80 mb-6 min-h-[1.5rem]"
-        >
-          {contact.nudges[nudgeIndex]}
-        </motion.p>
-
-        <Button href={contact.ctaHref} className="mb-12">
+        <Button href={contact.ctaHref} className="mb-12 mt-2">
           {contact.cta}
         </Button>
 
-        <div className="flex justify-center gap-6 mb-12">
+        <div className="flex justify-center gap-6 mb-8">
           {contact.social.map((s) => {
             const Icon = socialIcons[s.icon as keyof typeof socialIcons]
             return (
@@ -85,6 +65,8 @@ export function ContactSection() {
                 key={s.label}
                 href={s.href}
                 aria-label={s.label}
+                target={s.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={s.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                 className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center text-muted hover:text-accent hover:border-accent/40 transition-all duration-300"
               >
                 <Icon className="h-4 w-4" />
@@ -92,6 +74,8 @@ export function ContactSection() {
             )
           })}
         </div>
+
+        <ContactDialogue className="mb-10" />
 
         <p className="text-xs text-muted">{contact.copyright}</p>
       </div>

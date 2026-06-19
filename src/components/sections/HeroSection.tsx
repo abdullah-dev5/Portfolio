@@ -32,7 +32,7 @@ export function HeroSection() {
           <SplitRevealText
             text={hero.sub}
             as="p"
-            className="body-lg mt-8 md:mt-10 max-w-xl text-text/80"
+            className="body-lg mt-6 md:mt-8 max-w-xl text-text/80"
             delay={0.7}
           />
           <motion.div

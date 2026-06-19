@@ -82,18 +82,101 @@ export const services = {
 export const techStack = {
   label: 'TECH STACK',
   title: 'Tools I use',
-  center: { name: 'React', icon: 'react' as const },
-  tools: [
-    { name: 'TypeScript', icon: 'typescript' as const },
-    { name: 'Node.js', icon: 'nodejs' as const },
-    { name: 'AdonisJS', icon: 'adonisjs' as const },
-    { name: 'Next.js', icon: 'nextjs' as const },
-    { name: 'PostgreSQL', icon: 'postgresql' as const },
-    { name: 'MongoDB', icon: 'mongodb' as const },
-    { name: 'Docker', icon: 'docker' as const },
-    { name: 'GitHub Actions', icon: 'githubactions' as const },
-    { name: 'Cypress', icon: 'cypress' as const },
-    { name: 'Figma', icon: 'figma' as const },
+  intro:
+    'TypeScript-first full-stack toolkit — from UI polish to production pipelines and test coverage.',
+  highlight: {
+    repos: 34,
+    primary: 'TypeScript',
+    focus: 'Full Stack Development',
+  },
+  categories: [
+    {
+      id: 'frontend',
+      title: 'Frontend',
+      description: 'Interfaces that feel fast, responsive, and alive.',
+      colSpan: 'md:col-span-2',
+      skills: [
+        { name: 'React', icon: 'react' as const },
+        { name: 'Next.js', icon: 'nextjs' as const },
+        { name: 'TypeScript', icon: 'typescript' as const },
+        { name: 'Inertia.js' },
+        { name: 'Tailwind CSS', icon: 'tailwind' as const },
+        { name: 'Framer Motion', icon: 'framer' as const },
+        { name: 'HTML / CSS' },
+      ],
+    },
+    {
+      id: 'backend',
+      title: 'Backend',
+      description: 'APIs, auth, real-time, and clean architecture.',
+      skills: [
+        { name: 'Node.js', icon: 'nodejs' as const },
+        { name: 'Express.js', icon: 'express' as const },
+        { name: 'AdonisJS', icon: 'adonisjs' as const },
+        { name: 'REST APIs' },
+        { name: 'Pusher' },
+        { name: 'Google Gemini' },
+      ],
+    },
+    {
+      id: 'databases',
+      title: 'Databases',
+      description: 'Relational and document stores in production.',
+      skills: [
+        { name: 'PostgreSQL', icon: 'postgresql' as const },
+        { name: 'MongoDB', icon: 'mongodb' as const },
+        { name: 'MySQL', icon: 'mysql' as const },
+        { name: 'SQLite', icon: 'sqlite' as const },
+      ],
+    },
+    {
+      id: 'devops',
+      title: 'DevOps & Cloud',
+      description: 'Ship, deploy, and keep systems running.',
+      skills: [
+        { name: 'Docker', icon: 'docker' as const },
+        { name: 'GitHub Actions', icon: 'githubactions' as const },
+        { name: 'Vercel', icon: 'vercel' as const },
+        { name: 'Railway' },
+        { name: 'Linux', icon: 'linux' as const },
+      ],
+    },
+    {
+      id: 'testing',
+      title: 'Testing & QA',
+      description: 'Confidence before every merge and deploy.',
+      skills: [
+        { name: 'Cypress', icon: 'cypress' as const },
+        { name: 'Jest', icon: 'jest' as const },
+        { name: 'Japa' },
+        { name: 'Postman' },
+        { name: 'Swagger' },
+        { name: 'Sentry' },
+      ],
+    },
+    {
+      id: 'languages',
+      title: 'Languages',
+      description: 'Core languages across the stack.',
+      skills: [
+        { name: 'TypeScript', icon: 'typescript' as const },
+        { name: 'JavaScript' },
+        { name: 'Python', icon: 'python' as const },
+        { name: 'Bash' },
+      ],
+    },
+    {
+      id: 'tools',
+      title: 'Tools & Design',
+      description: 'Version control, design, and collaboration.',
+      colSpan: 'md:col-span-2 lg:col-span-3',
+      skills: [
+        { name: 'Git', icon: 'git' as const },
+        { name: 'GitHub', icon: 'github' as const },
+        { name: 'Figma', icon: 'figma' as const },
+        { name: 'Vite' },
+      ],
+    },
   ],
 }
 
@@ -180,13 +263,13 @@ export const contact = {
   ctaHref: 'mailto:imabdullah.tdm@gmail.com',
   nudges: [
     'Yes Human! that button, press it NOW. thank you 😉',
-    "What are you waiting for? Smash that button human! 😏",
-    "I am waiting... don't leave me hanging 😏",
+    "Smash that 'Let's connect' button human! 😏",
+    'What are you waiting for?',
   ],
   social: [
-    { label: 'GitHub', href: '#', icon: 'github' },
-    { label: 'LinkedIn', href: '#', icon: 'linkedin' },
-    { label: 'X', href: '#', icon: 'x' },
+    { label: 'GitHub', href: 'https://github.com/abdullah-dev5', icon: 'github' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/muhammad-abdullah45', icon: 'linkedin' },
+    { label: 'Email', href: 'mailto:imabdullah.tdm@gmail.com', icon: 'email' },
   ],
   copyright: 'Muhammad Abdullah / © All rights reserved',
 }
@@ -204,7 +287,7 @@ export const chatFaq = {
     projects:
       'Muhammad built GradAccelerate — a full-stack AI productivity platform with real-time Pusher updates, Google OAuth, and 50% test coverage in CI. He also works on AdmissionTimes and Sustainbite.',
     skills:
-      'Muhammad specializes in React, TypeScript, Node.js, AdonisJS, PostgreSQL, MongoDB, Docker, GitHub Actions, and Cypress E2E testing.',
+      'Muhammad specializes in React, TypeScript, Node.js, AdonisJS, Next.js, PostgreSQL, MongoDB, Docker, GitHub Actions, Cypress, Jest, and Vercel.',
     contact:
       'You can reach Muhammad at imabdullah.tdm@gmail.com or connect via LinkedIn. Use the contact section below!',
     default:

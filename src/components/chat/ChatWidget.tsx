@@ -50,7 +50,7 @@ export function ChatWidget() {
         aria-label="Open AI Chat"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-accent/20 border border-accent/40 backdrop-blur-md flex items-center justify-center shadow-[0_0_20px_rgba(140,108,255,0.3)]"
+        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full glass-panel border-accent/35 flex items-center justify-center shadow-[0_0_20px_rgba(140,108,255,0.25)]"
       >
         <LogoMark size={28} />
       </motion.button>
@@ -61,7 +61,7 @@ export function ChatWidget() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[70] flex items-center justify-center bg-bg/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 backdrop-blur-md p-4"
             onClick={() => setOpen(false)}
           >
             <motion.div
@@ -70,7 +70,7 @@ export function ChatWidget() {
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-md glass-card rounded-2xl border border-accent/30 overflow-hidden accent-glow"
+              className="w-full max-w-md glass-card-glossy rounded-2xl overflow-hidden accent-glow"
             >
               <div className="flex items-center justify-between p-4 border-b border-white/5">
                 <LogoMark size={32} />
@@ -129,7 +129,7 @@ export function ChatWidget() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && sendMessage(input)}
                   placeholder="Type your message..."
-                  className="flex-1 bg-surface border border-white/10 rounded-full px-4 py-2 text-sm text-text placeholder:text-muted focus:outline-none focus:border-accent/50"
+                  className="flex-1 glass-inner rounded-full px-4 py-2 text-sm text-text placeholder:text-muted focus:outline-none focus:border-accent/40"
                 />
                 <button
                   type="button"

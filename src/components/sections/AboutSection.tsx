@@ -25,7 +25,7 @@ export function AboutSection() {
           <SplitRevealText
             text={about.greeting}
             as="h3"
-            className="section-title text-2xl md:text-3xl mb-6"
+            className="section-title text-xl md:text-2xl mb-5"
           />
           <p className="body-lg mb-4">{about.summary}</p>
           <p className="body-lg mb-8">{about.bio}</p>

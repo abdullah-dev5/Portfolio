@@ -1,30 +1,23 @@
 import { motion } from 'framer-motion'
 import { techStack } from '../../data/content'
 import { SectionShell } from '../layout/SectionShell'
-import { TechIcon, type TechIconId } from '../visuals/TechIcons'
+import { SplitRevealText } from '../ui/SplitRevealText'
+import { TechAbbr, TechIcon, type TechIconId } from '../visuals/TechIcons'
 
-const ORBIT = [
-  { x: 50, y: 6 },
-  { x: 82, y: 18 },
-  { x: 94, y: 50 },
-  { x: 82, y: 82 },
-  { x: 50, y: 94 },
-  { x: 18, y: 82 },
-  { x: 6, y: 50 },
-  { x: 18, y: 18 },
-]
-
-function curvedPath(cx: number, cy: number, tx: number, ty: number) {
-  const mx = (cx + tx) / 2 + (ty - cy) * 0.15
-  const my = (cy + ty) / 2 - (tx - cx) * 0.15
-  return `M ${cx} ${cy} Q ${mx} ${my} ${tx} ${ty}`
+function SkillPill({ name, icon }: { name: string; icon?: TechIconId }) {
+  return (
+    <motion.span
+      whileHover={{ scale: 1.04, borderColor: 'rgba(140,108,255,0.5)' }}
+      transition={{ duration: 0.2 }}
+      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-inner border-accent/20 text-xs md:text-sm text-text/90"
+    >
+      {icon ? <TechIcon id={icon} size={18} /> : <TechAbbr name={name} size={18} />}
+      <span className="whitespace-nowrap">{name}</span>
+    </motion.span>
+  )
 }
 
 export function TechStackSection() {
-  const tools = techStack.tools.slice(0, 8)
-  const cx = 50
-  const cy = 50
-
   return (
     <SectionShell
       id="tech"
@@ -33,81 +26,65 @@ export function TechStackSection() {
       title={techStack.title}
       className="relative"
     >
-      <div className="relative mx-auto h-[520px] md:h-[580px] max-w-4xl hidden md:block">
-        <svg
-          viewBox="0 0 100 100"
-          className="absolute inset-0 w-full h-full"
-          preserveAspectRatio="xMidYMid meet"
-          aria-hidden
-        >
-          {ORBIT.map((pos, i) => {
-            if (i >= tools.length) return null
-            return (
-              <motion.path
-                key={tools[i].name}
-                d={curvedPath(cx, cy, pos.x, pos.y)}
-                className="curve-line"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              />
-            )
-          })}
-        </svg>
+      <SplitRevealText text={techStack.intro} as="p" className="-mt-4 mb-8 max-w-2xl body-lg" />
 
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-        >
-          <div className="tech-tile h-24 w-24 md:h-28 md:w-28 rounded-2xl flex items-center justify-center shadow-[0_0_40px_rgba(140,108,255,0.4)]">
-            <TechIcon id={techStack.center.icon as TechIconId} size={48} />
-          </div>
-          <p className="text-center text-sm text-muted mt-3 font-mono">{techStack.center.name}</p>
-        </motion.div>
+      {/* GitHub-powered highlight strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="glass-panel rounded-2xl px-5 py-4 mb-8 flex flex-wrap items-center gap-x-6 gap-y-2"
+      >
+        <span className="font-mono text-xs text-accent uppercase tracking-widest">Stack profile</span>
+        <span className="text-sm text-text">
+          <span className="text-accent font-semibold">{techStack.highlight.primary}</span>-first
+        </span>
+        <span className="hidden sm:inline text-white/20">|</span>
+        <span className="text-sm text-muted">{techStack.highlight.repos} GitHub repos</span>
+        <span className="hidden sm:inline text-white/20">|</span>
+        <span className="text-sm text-muted">{techStack.highlight.focus}</span>
+      </motion.div>
 
-        {tools.map((tool, i) => {
-          const pos = ORBIT[i]
-          return (
-            <motion.div
-              key={tool.name}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
-              animate={{ y: [0, -6, 0] }}
-              style={{
-                position: 'absolute',
-                left: `${pos.x}%`,
-                top: `${pos.y}%`,
-                transform: 'translate(-50%, -50%)',
-                animationDuration: `${3.5 + i * 0.4}s`,
-              }}
-              className="z-10"
-            >
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 0 }}
-                className="tech-tile h-[72px] w-[72px] md:h-20 md:w-20 rounded-xl flex items-center justify-center rotate-[-12deg] hover:rotate-0 transition-transform duration-300 cursor-default"
-                title={tool.name}
-              >
-                <TechIcon id={tool.icon as TechIconId} size={36} />
-              </motion.div>
-            </motion.div>
-          )
-        })}
-      </div>
-
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 md:hidden">
-        {[techStack.center, ...techStack.tools].map((tool) => (
-          <div key={tool.name} className="tech-tile rounded-xl p-4 flex flex-col items-center gap-2">
-            <TechIcon id={tool.icon as TechIconId} size={32} />
-            <span className="text-[10px] text-muted text-center font-mono">{tool.name}</span>
-          </div>
+      {/* Bento grid — categorized stacks */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-60px' }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.08 } },
+        }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5"
+      >
+        {techStack.categories.map((category) => (
+          <motion.div
+            key={category.id}
+            variants={{
+              hidden: { opacity: 0, y: 24 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className={`glass-card-glossy rounded-2xl p-6 md:p-7 accent-glow-hover flex flex-col min-h-[180px] ${category.colSpan ?? ''}`}
+          >
+            <div className="mb-4">
+              <h3 className="text-base md:text-lg font-semibold text-text font-[family-name:var(--font-display)]">
+                {category.title}
+              </h3>
+              <p className="text-xs md:text-sm text-muted mt-1">{category.description}</p>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {category.skills.map((skill) => (
+                <SkillPill
+                  key={skill.name}
+                  name={skill.name}
+                  icon={'icon' in skill ? skill.icon : undefined}
+                />
+              ))}
+            </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </SectionShell>
   )
 }
