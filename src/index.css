@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #000000;
+  --color-surface: #0d0d12;
+  --color-text: #f0f0f5;
+  --color-muted: #9ca3af;
+  --color-accent: #8c6cff;
+  --color-accent-bright: #b49aff;
+  --color-accent-muted: #8c6cff33;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Syne", "Inter", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --ease-out-snappy: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(140, 108, 255, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(140, 108, 255, 0.04), transparent);
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Typography — reference scale */
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.body-lg {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
+
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(140, 108, 255, 0.04) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card-glossy {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(140, 108, 255, 0.06) 100%
+  );
+  border: 1px solid rgba(140, 108, 255, 0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.2),
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(140, 108, 255, 0.08);
+}
+
+.watermark-text {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 22vw, 16rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.04);
+  line-height: 0.85;
+  user-select: none;
+}
+
+.accent-glow-hover {
+  transition: all 0.35s var(--ease-out-snappy);
+}
+
+.accent-glow-hover:hover {
+  box-shadow:
+    0 16px 48px rgba(140, 108, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(140, 108, 255, 0.45);
+  transform: translateY(-4px);
+}
+
+.tech-tile {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(140, 108, 255, 0.35);
+  box-shadow:
+    0 0 20px rgba(140, 108, 255, 0.15),
+    inset 0 0 20px rgba(140, 108, 255, 0.05);
+}
+
+.curve-line {
+  fill: none;
+  stroke: rgba(140, 108, 255, 0.35);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 4px rgba(140, 108, 255, 0.4));
+}
