@@ -47,7 +47,7 @@ export function ChatWidget() {
       <motion.button
         type="button"
         onClick={() => setOpen(true)}
-        aria-label="Open AI Chat"
+        aria-label="Open chat"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full glass-panel border-accent/35 flex items-center justify-center shadow-[0_0_20px_rgba(140,108,255,0.25)]"
@@ -84,7 +84,7 @@ export function ChatWidget() {
                 </button>
               </div>
 
-              <div className="h-64 overflow-y-auto p-4 space-y-4">
+              <div className="themed-scrollbar h-64 overflow-y-auto p-4 space-y-4">
                 {messages.map((msg, i) => (
                   <div
                     key={i}

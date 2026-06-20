@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { site } from '../../data/content'
 
 interface LogoProps {
   showWordmark?: boolean
@@ -42,8 +43,8 @@ export function Logo({ showWordmark = true, size = 'md', className = '' }: LogoP
       </motion.svg>
       {showWordmark && (
         <span className={`font-semibold tracking-tight ${s.text}`}>
-          <span className="text-text">Muhammad</span>
-          <span className="text-accent">Abdullah</span>
+          <span className="text-text">{site.firstName}</span>{' '}
+          <span className="text-accent">{site.lastName}</span>
         </span>
       )}
     </a>

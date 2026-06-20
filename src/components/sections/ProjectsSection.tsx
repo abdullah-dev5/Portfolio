@@ -8,6 +8,10 @@ import { SplitRevealText } from '../ui/SplitRevealText'
 const slideClass = 'flex-[0_0_88%] sm:flex-[0_0_58%] lg:flex-[0_0_44%] min-w-0 pl-1'
 const endSpacerClass = 'flex-[0_0_12%] sm:flex-[0_0_42%] lg:flex-[0_0_56%] min-w-0 shrink-0'
 
+function isLiveUrl(url: string) {
+  return url.startsWith('http') && !url.endsWith('#')
+}
+
 export function ProjectsSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
@@ -57,49 +61,85 @@ export function ProjectsSection() {
 
       <div className="overflow-hidden relative z-10 cursor-grab active:cursor-grabbing" ref={emblaRef}>
         <div className="flex gap-4 md:gap-5">
-          {projects.items.map((project) => (
-            <div key={project.title} className={slideClass}>
-              <article className="glass-card-glossy rounded-2xl overflow-hidden accent-glow-hover transition-all duration-300 group h-full">
-                <div className="relative h-44 md:h-56 overflow-hidden border-b border-white/5 flex items-center justify-center">
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-75 transition-transform duration-500 group-hover:scale-110`}
-                  />
-                  <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
-                  <span className="relative z-10 text-4xl md:text-5xl font-bold text-white/25">
-                    {project.initials}
-                  </span>
-                  <div className="absolute inset-0 z-20 bg-black/30 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 gap-2 flex-wrap">
-                    {project.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="px-2 py-1 text-xs rounded-full glass-inner text-accent border-accent/30"
+          {projects.items.map((project) => {
+            const coverSrc = 'cover' in project ? project.cover : undefined
+            const coverAlt =
+              'coverAlt' in project && project.coverAlt ? project.coverAlt : project.title
+            const coverPosition =
+              'coverPosition' in project && project.coverPosition
+                ? project.coverPosition
+                : 'center center'
+            const liveUrl =
+              'liveUrl' in project && typeof (project as { liveUrl?: string }).liveUrl === 'string'
+                ? (project as { liveUrl: string }).liveUrl
+                : undefined
+            const showLive = liveUrl && isLiveUrl(liveUrl)
+
+            return (
+              <div key={project.title} className={slideClass}>
+                <article className="glass-card-glossy rounded-2xl overflow-hidden accent-glow-hover transition-all duration-300 group h-full">
+                  <div className="relative h-44 md:h-56 overflow-hidden border-b border-white/5">
+                    {coverSrc ? (
+                      <>
+                        <img
+                          src={coverSrc}
+                          alt={coverAlt}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-110"
+                          style={{ objectPosition: coverPosition }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-75 transition-transform duration-700 ease-out group-hover:scale-110`}
+                        />
+                        <span className="absolute inset-0 flex items-center justify-center text-4xl md:text-5xl font-bold text-white/25">
+                          {project.initials}
+                        </span>
+                      </>
+                    )}
+                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/75 via-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4 gap-2 flex-wrap pointer-events-none">
+                      {project.tools.map((tool) => (
+                        <span
+                          key={tool}
+                          className="px-2 py-1 text-xs rounded-full glass-inner text-accent border-accent/30"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="p-5 md:p-6 bg-white/[0.02]">
+                    <h3 className="text-base md:text-lg font-bold text-text mb-2">{project.title}</h3>
+                    <p className="text-muted text-sm leading-relaxed mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-3">
+                      {showLive && (
+                        <a
+                          href={liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all duration-300"
+                        >
+                          Visit Live Site <ExternalLink className="h-4 w-4" />
+                        </a>
+                      )}
+                      <a
+                        href={project.detailUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all duration-300"
                       >
-                        {tool}
-                      </span>
-                    ))}
+                        View on GitHub <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="p-5 md:p-6 bg-white/[0.02]">
-                  <h3 className="text-base md:text-lg font-bold text-text mb-2">{project.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed mb-4 line-clamp-3">{project.description}</p>
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href={project.liveUrl}
-                      className="inline-flex items-center gap-2 text-sm text-accent hover:gap-3 transition-all duration-300"
-                    >
-                      Visit Live Site <ExternalLink className="h-4 w-4" />
-                    </a>
-                    <a
-                      href={project.detailUrl}
-                      className="inline-flex items-center gap-2 text-sm text-muted hover:text-text hover:gap-3 transition-all duration-300"
-                    >
-                      View Project Detail <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
-                </div>
-              </article>
-            </div>
-          ))}
+                </article>
+              </div>
+            )
+          })}
           <div className={endSpacerClass} aria-hidden />
         </div>
       </div>

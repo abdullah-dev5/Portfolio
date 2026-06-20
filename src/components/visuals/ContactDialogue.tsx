@@ -19,11 +19,15 @@ export function ContactDialogue({ className = '' }: ContactDialogueProps) {
       <motion.div
         layout
         transition={{ layout: { duration: 0.2, ease: [0.22, 1, 0.36, 1] } }}
-        className="inline-block max-w-[min(100%,320px)] md:max-w-[360px] glass-panel px-4 py-3 rounded-2xl text-left"
+        className="dialogue-bubble max-w-[min(100%,340px)] md:max-w-[380px]"
       >
-        <p className="font-mono text-xs md:text-sm text-text/95 leading-relaxed break-words">
+        <div className="dialogue-bubble__header">
+          <span className="dialogue-bubble__dot" aria-hidden />
+          <span className="dialogue-bubble__label">Incoming ping</span>
+        </div>
+        <p className="dialogue-bubble__text">
           {text}
-          <span className="dialogue-cursor inline-block w-[2px] h-[0.95em] bg-accent ml-0.5 align-middle" aria-hidden />
+          <span className="dialogue-cursor inline-block w-[2px] h-[0.95em] bg-accent-bright ml-0.5 align-middle" aria-hidden />
         </p>
       </motion.div>
     </div>

@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { hero, navLinks, sections } from '../../data/content'
+import { hero, navLinks, navDotSections } from '../../data/content'
 import { Button } from '../ui/Button'
 import { Logo } from '../ui/Logo'
 
@@ -14,9 +14,21 @@ export function Navbar({ activeSection }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    let frame = 0
+    const onScroll = () => {
+      if (!frame) {
+        frame = requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40)
+          frame = 0
+        })
+      }
+    }
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [])
 
   return (
@@ -29,47 +41,48 @@ export function Navbar({ activeSection }: NavbarProps) {
           scrolled ? 'glass-nav-scrolled' : 'glass-nav-top'
         }`}
       >
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-6 py-4 md:px-12">
           <Logo size="sm" />
 
-          <div className="hidden md:flex items-center gap-1.5 absolute left-1/2 -translate-x-1/2">
-            {sections.map((s) => (
+          {/* Scroll dots — tablet only; desktop uses text links */}
+          <div className="hidden md:flex lg:hidden items-center justify-center gap-1 min-w-0">
+            {navDotSections.map((s) => (
               <button
                 key={s.id}
                 type="button"
                 onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label={`Go to ${s.label}`}
-                className="px-1 py-2"
+                className="px-0.5 py-2 shrink-0"
               >
                 <span
                   className={`block h-0.5 rounded-full transition-all duration-300 ${
                     activeSection === s.id
-                      ? 'w-6 bg-accent'
-                      : 'w-3 bg-white/20 hover:bg-white/40'
+                      ? 'w-5 bg-accent'
+                      : 'w-2.5 bg-white/20 hover:bg-white/40'
                   }`}
                 />
               </button>
             ))}
           </div>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center justify-end gap-5 xl:gap-6 min-w-0">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-muted hover:text-text transition-colors duration-200"
+                className="text-xs xl:text-sm text-muted hover:text-text transition-colors duration-200 whitespace-nowrap"
               >
                 {link.label}
               </a>
             ))}
-            <Button href={hero.ctaHref} variant="ghost" showOrb className="!py-2 !px-4 !text-sm">
+            <Button href={hero.ctaHref} variant="ghost" showOrb className="!py-2 !px-3 xl:!px-4 !text-xs xl:!text-sm shrink-0">
               {hero.cta}
             </Button>
           </nav>
 
           <button
             type="button"
-            className="lg:hidden p-2 text-text"
+            className="lg:hidden justify-self-end p-2 text-text"
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >

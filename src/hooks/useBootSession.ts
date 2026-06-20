@@ -1,15 +1,23 @@
 import { useCallback, useState } from 'react'
 
-const BOOT_KEY = 'bootComplete'
+const BOOT_KEY = 'portfolio_boot_v2'
 
 export function useBootSession() {
   const [showBoot, setShowBoot] = useState(() => {
     if (typeof window === 'undefined') return true
-    return sessionStorage.getItem(BOOT_KEY) !== 'true'
+    try {
+      return localStorage.getItem(BOOT_KEY) !== 'true'
+    } catch {
+      return true
+    }
   })
 
   const completeBoot = useCallback(() => {
-    sessionStorage.setItem(BOOT_KEY, 'true')
+    try {
+      localStorage.setItem(BOOT_KEY, 'true')
+    } catch {
+      /* storage blocked — still dismiss overlay */
+    }
     setShowBoot(false)
   }, [])
 

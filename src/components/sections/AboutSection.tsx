@@ -1,4 +1,5 @@
 import { Mail } from 'lucide-react'
+import aboutPortrait from '../../assets/about-portrait.webp'
 import { about, site } from '../../data/content'
 import { SectionShell } from '../layout/SectionShell'
 import { SplitRevealText } from '../ui/SplitRevealText'
@@ -15,10 +16,15 @@ export function AboutSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="flex justify-center lg:justify-start">
           <div className="relative h-64 w-64 md:h-80 md:w-80 rounded-2xl overflow-hidden glass-card accent-glow">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/30 to-surface flex items-center justify-center">
-              <span className="text-6xl font-bold text-accent/40">MA</span>
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-bg/80 to-transparent" />
+            <img
+              src={aboutPortrait}
+              alt={`Portrait of ${site.name}`}
+              className="absolute inset-0 h-full w-full object-cover object-top"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-accent/10" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
           </div>
         </div>
         <div>

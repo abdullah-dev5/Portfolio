@@ -1,3 +1,7 @@
+import gradAccelerateCover from '../assets/project-accelerate-hub-cover-v2.webp'
+import admissionTimesCover from '../assets/project-admission-portal-cover.webp'
+import snipNoteCover from '../assets/project-snipnote-lab-cover.webp'
+
 export const site = {
   name: 'Muhammad Abdullah',
   firstName: 'Muhammad',
@@ -10,6 +14,7 @@ export const site = {
 
 export const navLinks = [
   { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Experience', href: '#experience' },
   { label: 'About me', href: '#about-me' },
   { label: 'Contact', href: '#contact' },
 ] as const
@@ -17,10 +22,22 @@ export const navLinks = [
 export const sections = [
   { id: 'hero', label: 'Hero' },
   { id: 'trust', label: 'Trust' },
-  { id: 'services', label: 'Services' },
+  { id: 'services', label: 'Expertise' },
   { id: 'tech', label: 'Tech' },
   { id: 'portfolio', label: 'Portfolio' },
+  { id: 'experience', label: 'Experience' },
   { id: 'testimonials', label: 'Testimonials' },
+  { id: 'about-me', label: 'About' },
+  { id: 'contact', label: 'Contact' },
+] as const
+
+/** Key sections for scroll-dot nav (avoids overcrowding the navbar) */
+export const navDotSections = [
+  { id: 'hero', label: 'Hero' },
+  { id: 'services', label: 'Expertise' },
+  { id: 'tech', label: 'Tech' },
+  { id: 'portfolio', label: 'Portfolio' },
+  { id: 'experience', label: 'Experience' },
   { id: 'about-me', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ] as const
@@ -53,28 +70,27 @@ export const trust = {
 }
 
 export const services = {
-  label: 'SERVICES',
+  label: 'EXPERTISE',
   title: 'What I Build',
-  intro:
-    'From concept to clean code — I design and develop future-proof digital experiences.',
+  intro: 'Focused full-stack work — from interface to deployment.',
   items: [
     {
-      icon: 'layers',
-      title: 'Full Stack Development',
+      icon: 'sparkles',
+      title: 'Web Applications',
       description:
-        'React + Node/AdonisJS apps from database schema to production deployment.',
+        'Fast, responsive products with clean UX — built to engage users and support real business goals.',
     },
     {
-      icon: 'server',
-      title: 'API & Backend Engineering',
+      icon: 'code',
+      title: 'Backend & APIs',
       description:
-        'RESTful APIs with PostgreSQL/MongoDB, real-time updates, and clean architecture.',
+        'Secure, scalable services and data layers that power apps without becoming a maintenance burden.',
     },
     {
-      icon: 'shield-check',
-      title: 'CI/CD & Quality',
+      icon: 'rocket',
+      title: 'Ship & Scale',
       description:
-        'GitHub Actions pipelines, Cypress E2E, Jest/Japa — tested code that ships confidently.',
+        'Tested, deployment-ready delivery with CI pipelines so releases stay reliable as you grow.',
     },
   ],
 }
@@ -184,37 +200,73 @@ export const projects = {
   label: 'PROJECTS',
   title: 'Selected Work',
   intro:
-    'Craft meets conversion. Here are a few recent projects that pushed boundaries.',
+    'Production apps and tools I have shipped — from AI-powered platforms to focused developer utilities.',
   items: [
     {
       title: 'GradAccelerate',
       description:
-        'Full-stack AI productivity platform — notes, projects, bookmarks, todos, and reminders with real-time Pusher updates. Production-deployed with 50% test coverage enforced in CI.',
+        'Full-stack AI productivity platform with notes, todos, projects, and reminders — real-time Pusher updates, Google OAuth, and 50% test coverage in CI.',
       tools: ['AdonisJS', 'React', 'TypeScript', 'Inertia.js', 'Gemini', 'Railway'],
-      liveUrl: '#',
-      detailUrl: '#',
+      detailUrl: 'https://github.com/abdullah-dev5/gradaccelerate-project-x',
       initials: 'GA',
       gradient: 'from-violet-600/40 to-indigo-900/60',
+      cover: gradAccelerateCover,
+      coverAlt: 'GradAccelerate AI productivity dashboard preview',
+      coverPosition: '65% center',
     },
     {
       title: 'AdmissionTimes',
       description:
-        'Admissions media and content platform helping students navigate applications with curated guides, timelines, and resources.',
-      tools: ['React', 'Node.js', 'TypeScript', 'PostgreSQL'],
-      liveUrl: '#',
-      detailUrl: '#',
+        'Admissions platform for discovering universities, tracking deadlines, and reading curated education news — React frontend with a TypeScript backend.',
+      tools: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+      detailUrl: 'https://github.com/abdullah-dev5/AdmissionTimes-frontend',
       initials: 'AT',
       gradient: 'from-purple-600/40 to-blue-900/60',
+      cover: admissionTimesCover,
+      coverAlt: 'AdmissionTimes admissions platform preview',
+      coverPosition: '58% center',
     },
     {
-      title: 'Sustainbite',
+      title: 'SnipNote',
       description:
-        'Sustainability-focused food-tech product connecting conscious consumers with local eco-friendly meal options and impact tracking.',
-      tools: ['React', 'PostgreSQL', 'Docker', 'Node.js'],
-      liveUrl: '#',
-      detailUrl: '#',
-      initials: 'SB',
-      gradient: 'from-emerald-600/40 to-teal-900/60',
+        'Snippet and note capture app for saving code blocks, tags, and quick clips in a fast Vite + React + Tailwind interface.',
+      tools: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+      detailUrl: 'https://github.com/abdullah-dev5/SnipNote',
+      initials: 'SN',
+      gradient: 'from-indigo-600/40 to-violet-900/60',
+      cover: snipNoteCover,
+      coverAlt: 'SnipNote snippet capture app preview',
+      coverPosition: '55% center',
+    },
+  ],
+}
+
+export const experience = {
+  label: 'EXPERIENCE',
+  title: 'Work Experience',
+  intro:
+    'Production-focused full-stack roles — building APIs, responsive interfaces, and reliable web applications.',
+  work: [
+    {
+      role: 'Full Stack Engineer',
+      company: 'Individual Entrepreneur',
+      period: 'Jun 2024 — Oct 2024',
+      location: 'Pakistan · Remote',
+      highlights: [
+        'Designed and implemented RESTful APIs using Node.js and Express.js.',
+        'Developed responsive user interfaces with React.js.',
+        'Integrated databases for efficient data storage and retrieval.',
+      ],
+    },
+    {
+      role: 'Web Developer',
+      company: 'FasTech Systems',
+      period: 'Jul 2023 — Sep 2023',
+      location: 'Pakistan',
+      highlights: [
+        'Contributed to client web projects with focus on responsive front-end delivery.',
+        'Collaborated on feature implementation and UI refinements across the stack.',
+      ],
     },
   ],
 }
@@ -250,7 +302,7 @@ export const testimonials = {
 export const about = {
   label: 'MY BIO',
   title: 'About Me',
-  greeting: "Hey, I'm Muhammad.",
+  greeting: "Hey, I'm Muhammad Abdullah.",
   bio: "I'm a Full Stack Developer obsessed with blending design, code, and intelligence. Whether you're building a brand or reinventing a platform, I help you craft digital experiences that work hard — and look alive.",
   summary:
     'Full Stack Developer with 2+ years of experience building production-grade web applications using JavaScript and TypeScript. Shipped a complete AI-powered productivity platform with real-time updates, Google OAuth, CI/CD pipelines, and E2E test coverage.',
@@ -262,7 +314,6 @@ export const contact = {
   cta: "Let's connect",
   ctaHref: 'mailto:imabdullah.tdm@gmail.com',
   nudges: [
-    'Yes Human! that button, press it NOW. thank you 😉',
     "Smash that 'Let's connect' button human! 😏",
     'What are you waiting for?',
   ],
@@ -276,8 +327,8 @@ export const contact = {
 
 export const chatFaq = {
   greeting:
-    "Hey human 👋 I'm your AI assistant. Ask me anything about Muhammad's work, projects, or skills!",
-  disclaimer: "Muhammad's Portfolio AI assistant • Responses may vary",
+    "Hey human 👋 I'm your portfolio assistant. Ask me anything about Muhammad's work, projects, or skills!",
+  disclaimer: "Muhammad's Portfolio assistant • Responses may vary",
   quickQuestions: [
     'Tell me about your projects',
     'What are your skills?',
@@ -285,7 +336,7 @@ export const chatFaq = {
   ],
   responses: {
     projects:
-      'Muhammad built GradAccelerate — a full-stack AI productivity platform with real-time Pusher updates, Google OAuth, and 50% test coverage in CI. He also works on AdmissionTimes and Sustainbite.',
+      'Muhammad built GradAccelerate — a full-stack AI productivity platform with real-time Pusher updates, Google OAuth, and 50% test coverage in CI. He also works on AdmissionTimes and SnipNote.',
     skills:
       'Muhammad specializes in React, TypeScript, Node.js, AdonisJS, Next.js, PostgreSQL, MongoDB, Docker, GitHub Actions, Cypress, Jest, and Vercel.',
     contact:
